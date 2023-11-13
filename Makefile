@@ -3,9 +3,9 @@
 	OBJS = labMonteCarlo.o utils.o
 
 # Compilador
-	CC = gcc -Wall
-	override CFLAGS += -Wall -O3
-
+	CC = gcc -Wall -g
+	override CFLAGS += -Wall -O3 -lm -mavx -march=native
+	LFLAGS = -lm
 # Lista de arquivos para distribuição
 DISTFILES = *.c *.h README.md Makefile
 DISTDIR = `basename ${PWD}`
@@ -21,7 +21,7 @@ debug: CFLAGS += -g -D_DEBUG_
 debug: all
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 clean:
 	@echo "Limpando ...."
