@@ -4,7 +4,7 @@
 
 # Compilador
 	CC = gcc -Wall -g
-	override CFLAGS += -Wall -O3 -lm -mavx -march=native
+	override CFLAGS += -Wall -O3 -lm -mavx -march=native -D_RET_ -D_MC_
 	LFLAGS = -lm
 # Lista de arquivos para distribuição
 DISTFILES = *.c *.h README.md Makefile
@@ -19,6 +19,12 @@ all: $(PROG)
 
 debug: CFLAGS += -g -D_DEBUG_
 debug: all
+
+mc: CFLAGS := $(filter-out -D_RET_,$(CFLAGS))
+mc: all
+
+ret: CFLAGS := $(filter-out -D_MC_,$(CFLAGS))
+ret: all
 
 $(PROG): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
