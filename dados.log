@@ -1,0 +1,60 @@
+Limpando ....
+Faxina ....
+
+Fazendo o caso 10⁷ para o método de Monte Carlo em 2 dimensões
+
+a = (-4.000000), b = (4.000000), n = (100000000), dimensões = 2
+Tempo decorrido: 2713.794415 ms.
+Resultado por Monte Carlo: 2184.44076682
+
+Limpando ....
+Faxina ....
+
+---------------------------------------------------------------------------
+
+Fazendo os casos de 10 até 10⁷ para o método dos retângulos em 2 dimensões
+
+a = (-4.000000), b = (4.000000), n = (10), h = (0.8)
+Tempo decorrido: 0.000110 ms.
+Resultado por método dos retângulos: 2204.18048000
+
+a = (-4.000000), b = (4.000000), n = (100), h = (0.08)
+Tempo decorrido: 0.000175 ms.
+Resultado por método dos retângulos: 2196.24115405
+
+a = (-4.000000), b = (4.000000), n = (1000), h = (0.008)
+Tempo decorrido: 0.001111 ms.
+Resultado por método dos retângulos: 2185.80241068
+
+a = (-4.000000), b = (4.000000), n = (10000), h = (0.0008)
+Tempo decorrido: 0.010268 ms.
+Resultado por método dos retângulos: 2184.66122411
+
+a = (-4.000000), b = (4.000000), n = (100000), h = (8e-05)
+Tempo decorrido: 0.100823 ms.
+Resultado por método dos retângulos: 2184.54613224
+
+a = (-4.000000), b = (4.000000), n = (1000000), h = (8e-06)
+Tempo decorrido: 1.028456 ms.
+Resultado por método dos retângulos: 2184.53461332
+
+a = (-4.000000), b = (4.000000), n = (10000000), h = (8e-07)
+Tempo decorrido: 10.165796 ms.
+Resultado por método dos retângulos: 2184.53346133
+
+
+Limpando ....
+Faxina ....
+---------------------------------------------------------------------------
+
+Fazendo os casos de 2, 4 e 8 dimensões de Monte Carlo.
+a = (-4.000000), b = (4.000000), n = (100000000), dimensões = 4
+Tempo decorrido: 5374.280570 ms.
+Resultado por Monte Carlo: 279623.48422305
+
+
+a = (-4.000000), b = (4.000000), n = (100000000), dimensões = 8
+Tempo decorrido: 10551.562233 ms.
+Resultado por Monte Carlo: 2290631857.37847185
+
+
