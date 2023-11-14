@@ -32,7 +32,7 @@ Não foi encontrado algum problema visível aos alunos.
 
 Primeiramente o temos abaixo o valor aproximado da integração para de -4 a 4 da equação de Styblinski-Tang para duas dimensões, para termos como o resultado real e quase-absoluto do problema.
 
-$\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2}\, \mathrm{d}x\, \mathrm{d}y ≈ -2184.5333333...$
+$\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2} \mathrm{d}x \mathrm{d}y ≈ -2184.5333333...$
 
 A seguir duas tabelas com os valores obtidos pelos logs das execuções (note que o método de Monte Carlo é constante pois estamos comparando apenas para 10⁷ amostras em duas dimensões com valores alterando apenas para o método dos retângulos)
 
@@ -71,20 +71,20 @@ A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo 
 
 Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
 
-$h^{2}\displaystyle\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2} \, \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$
+$h^{2}\displaystyle\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$
 
 Como $x^4 - 16 x^2 + 5x = y^4 - 16 y^2 + 5y$ devido a serem equivalentes no sentido do passo e portanto, iguais. Podemos fazer isto:
 
-$h^{2} \, \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
-h^{2} \, \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =$
+$h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
+h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =$
 
-$h^{2} \, \frac{1}{2} \displaystyle\sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
-\frac{1}{2}\, n \, p\, h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
+$h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
+\frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
 
 Como $n = 2$, temos que
 
-$\frac{1}{2}\, 2\, h^{2}\,p\displaystyle\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
- h^{2}\,p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
+$\frac{1}{2} 2 h^{2}p\displaystyle\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
+ h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
 
 No código está assim:
 ```
