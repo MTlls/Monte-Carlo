@@ -36,9 +36,7 @@ Não foi encontrado algum problema visível aos alunos.
 
 Primeiramente o temos abaixo o valor aproximado da integração para de -4 a 4 da equação de Styblinski-Tang para duas dimensões, para termos como o resultado real e quase-absoluto do problema.
 
-```math
-\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2} \mathrm{d}x \mathrm{d}y ≈ -2184.5333333...
-```
+$$\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2} \mathrm{d}x \mathrm{d}y ≈ -2184.5333333...$$
 
 A seguir duas tabelas com os valores obtidos pelos logs das execuções (note que o método de Monte Carlo é constante pois estamos comparando apenas para 10⁷ amostras em duas dimensões com valores alterando apenas para o método dos retângulos)
 
