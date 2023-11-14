@@ -83,7 +83,7 @@ $\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) =
 
 Como $n = 2$, temos que
 
-$ \displaystyle\frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
+$\displaystyle \frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
  h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
 
 No código está assim:
