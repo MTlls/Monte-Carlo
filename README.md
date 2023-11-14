@@ -12,6 +12,10 @@ caso queira rodar apenas um comando para ver as diferenças, utilize
     source principal.sh
 ```
 
+caso queira rodar apenas o programa `./monteCarlo`, use
+```bash
+    ./monteCarlo limiteInf limiteSup numPontos numDimensoes
+```
 ### geração de dados
 ```bash
     source ./gera_dados.sh
@@ -73,27 +77,27 @@ A não-dependencia de $`x`$ com $`y`$ (tornando-os equivalentes no sentido do pa
 
 Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
 
-```math
-\displaystyle h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}
-```
+$$
+\displaystyle h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x_{i}^4 - 16 x_{i}^2 + 5x_{i}}{2} = h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x_{i}^4 - 16 x_{i}^2 + 5x_{i}}
+$$
 
 Como $x^4 - 16 x^2 + 5x = y^4 - 16 y^2 + 5y$ devido a serem equivalentes no sentido do passo e portanto, iguais. Podemos fazer isto:
 
-```math
-\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
-h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =
-```
+$$
+\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x_{i}^4 - 16 x_{i}^2 + 5x_{i}} =
+h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x_{i}^4 - 16 x_{i}^2 + 5x_{i})} =
+$$
 
-```math
-\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
-\frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)
-```
+$$
+\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x_{i}^4 - 16 x_{i}^2 + 5x_{i}) = 
+\frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x_{i}^4 - 16 x_{i}^2 + 5x_{i})
+$$
 Como $n = 2$, temos que
 
-```math
-\displaystyle \frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
- h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)
-``` 
+$$
+\displaystyle \frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x_{i}^4 - 16 x_{i}^2 + 5x_{i}) =
+ h^{2}p\sum_{i=1}^{p}(x_{i}^4 - 16 x_{i}^2 + 5x_{i})
+$$
 
 No código está assim:
 ```
@@ -114,6 +118,11 @@ double retangulos_xy(double a, double b, int qntdPontos) {
     [...]
 }
 ```
+
+Também foi feito otimizações no cálculo da função de ``Styblinski-Tang``, não necessitando recalcular o quadrado de $x_{i}$.
+
+No método de Monte Carlo foi otimizado o loop, usando apenas um laço e diminuindo o número de divisões também. Já que pode se jogar "pra fora" o $\frac{1}{2}$.
+
 ### Resultados de Monte Carlo
 
 | Dimensões |  Resultado Monte Carlo | Tempo Monte Carlo p/ 10⁷ amostras (ms)|

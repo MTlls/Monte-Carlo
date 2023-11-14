@@ -10,17 +10,22 @@
 #define SRAND(a) srand(a)                  // srand48(a)
 #define NPONTOS (int)10e7
 /**
- * Função que faz a resolução da equação que será futuramente somada no numerador da função de styblinskiTang.
+ * Função que faz a resolução da equação de styblinskiTang para uma dimensão apenas. É jogado fora o 1/2 pois pode ser resolvido depois.
  *
  * f(x)=x⁴-16x²+5x
  * @param x valor da variável aleatória
  */
 inline double f(double x) {
-	return ((x * x * x * x) + (-16 * (x * x)) + (5 * x));
+    // otimizado - calcula o quadrado apenas uma vez
+    double sqr = x * x;
+    double resultado = sqr * sqr;
+    resultado += (-16 * (sqr)) + (5 * x);
+
+	return resultado;
 }
 
-// Integral Monte Carlo da função    de 2 variáveis
-double styblinskiTang(double a, double b, int dimensoes) {
+// Integral Monte Carlo da função de 2 variáveis/dimesnões
+double MonteCarlo(double a, double b, int dimensoes) {
 	double resultado = 0.0, soma = 0.0, h = b - a, x = 0.0;
 	double t_inicial, t_final;  // tempo que será cronometrado.
 
@@ -28,24 +33,18 @@ double styblinskiTang(double a, double b, int dimensoes) {
 
 	t_inicial = timestamp();
 
+	/* até tentamos dar unroll, mas parece que o NRAND impossibilita o compilador de otimizar */
 	// feito o cálculo para cada amostra de ponto
-	for(int i = 0; i < NPONTOS; i++) {
-		// Dita quantas dimensões tem, executa para n-1 dimensoes
-		/* até tentamos dar unroll, mas parece que o NRAND impossibilita o compilador de otimizar */
-		for(int j = 0; j < dimensoes; j++) {
-			// Aqui é setado a variável aleatória entre b e a, uma para cada
-			// dimensão
-			x = (NRAND * (h)) + a;
-			soma += f(x);
-		}
+	for(int i = 0; i < NPONTOS * dimensoes; i++) {
+		// Aqui é setado a variável aleatória entre b e a, uma para cada dimensão, para cada amostra de ponto.
+		x = (NRAND * (h)) + a;
 
-		// a divisão é feita somente após ser calculado o somatório.
-		resultado += soma * 0.5;
-		soma = 0;
+		resultado += f(x);
 	}
 
-	// É feita a divisão e para cada dimensão, se multiplica por (b-a), logo, temos ((b-a)^dimensoes) * resultado / amostras.
-	resultado = pow(h, dimensoes) * (resultado / NPONTOS);
+
+	// É feita a divisão, com o 1/2 restante da função de Styblinski-Tang e para cada dimensão, se multiplica por (b-a), logo, temos ((b-a)^dimensoes) * resultado / amostras * 2.
+	resultado = pow(h, dimensoes) * (resultado / (NPONTOS*2));
 
 	t_final = timestamp();
 	printf("Tempo decorrido: %f ms.\n", t_final - t_inicial);
