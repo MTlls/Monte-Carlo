@@ -32,7 +32,9 @@ Não foi encontrado algum problema visível aos alunos.
 
 Primeiramente o temos abaixo o valor aproximado da integração para de -4 a 4 da equação de Styblinski-Tang para duas dimensões, para termos como o resultado real e quase-absoluto do problema.
 
-$$\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2} \mathrm{d}x \mathrm{d}y ≈ -2184.5333333...$$
+```math
+\displaystyle\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2} \mathrm{d}x \mathrm{d}y ≈ -2184.5333333...
+```
 
 A seguir duas tabelas com os valores obtidos pelos logs das execuções (note que o método de Monte Carlo é constante pois estamos comparando apenas para 10⁷ amostras em duas dimensões com valores alterando apenas para o método dos retângulos)
 
@@ -58,7 +60,7 @@ A seguir duas tabelas com os valores obtidos pelos logs das execuções (note qu
 
 ### Entrada aceitável
 
-É visível que a partir de 10⁴ pontos, temos um ponto onde o valor para o metódo dos retângulos já ultrapassa o método de Monte Carlo em precisão, pois o erro absoluto é menor ($EA_{RET}$ = 0,12789081, $EA_{MC}$ = 0,220457290). Com o tempo uma diferença de tempo discrepante de 2685,429408 ms (2,6 segundos). 
+É visível que a partir de 10⁴ pontos, temos um ponto onde o valor para o metódo dos retângulos já ultrapassa o método de Monte Carlo em precisão, pois o erro absoluto é menor ($`EA_{RET}`$ = 0,12789081, $`EA_{MC}`$ = 0,220457290). Com o tempo uma diferença de tempo discrepante de 2685,429408 ms (2,6 segundos). 
 
 Caso se deseja uma exatidão maior com menos tempo, é recomendado o método dos retângulos com 10⁴ ou mais pontos.
 
@@ -67,24 +69,31 @@ O porquê de ser mais rápido sendo que há mais loops no método dos retângulo
 ### Otimizações
 Devido às otimizações feitas nos loops dentro da função de cálculo dos retângulos, a mesma se tornou extremamente mais rápida. Melhorado apenas com detalhes algébricos/analíticos, aparenta ser mais rápido que o método de Monte Carlo devido a estarmos trabalhando especificamente com a função de ``Styblinski-Tang`` (para funções genéricas, o mesmo não funcionaria).
 
-A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo e portanto, iguais), a exclusão de $\frac{1}{2}$ dos somatórios e a manipulação algébrica dos somatórios torna que apenas é necessário calcular uma vez para $n$ pontos.
+A não-dependencia de $`x`$ com $`y`$ (tornando-os equivalentes no sentido do passo e portanto, iguais), a exclusão de $`\frac{1}{2}`$ dos somatórios e a manipulação algébrica dos somatórios torna que apenas é necessário calcular uma vez para $n$ pontos.
 
 Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
 
-$$\displaystyle h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$$
+```math
+\displaystyle h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}
+```
 
 Como $x^4 - 16 x^2 + 5x = y^4 - 16 y^2 + 5y$ devido a serem equivalentes no sentido do passo e portanto, iguais. Podemos fazer isto:
 
-$$\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
-h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =$$
+```math
+\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
+h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =
+```
 
-$$\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
-\frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$$
-
+```math
+\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
+\frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)
+```
 Como $n = 2$, temos que
 
-$$ \displaystyle \frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
- h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$$
+```math
+\displaystyle \frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
+ h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)
+``` 
 
 No código está assim:
 ```
