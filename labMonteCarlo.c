@@ -65,12 +65,13 @@ double retangulos_xy(double a, double b, int qntdPontos) {
 	t_inicial = timestamp();
 
 	// Como x e y são repetidos npontos vezes (2*npontos) e após isso o valor é divido pela metade, acaba que é equivalente a não ter dividido e executar apenas npontos vezes.
+	// Explicado melhor no README.
 	for(int i = 0; i < qntdPontos; i++) {
-		soma += (f(a + i * h) * qntdPontos);
+		soma += f(a + i * h);
 	}
 
-	// h² * somatorio
-	resultado = (h * h) * soma;
+	// h² * somatorio * qntdPontos
+	resultado = (h * h) * soma * qntdPontos;
 
 	t_final = timestamp();
 	printf("Tempo decorrido: %f ms.\n", t_final - t_inicial);

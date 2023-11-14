@@ -30,72 +30,81 @@ Não foi encontrado algum problema visível aos alunos.
 
 ## Comparações
 
-A seguir uma instância de log formatado:
+Primeiramente o temos abaixo o valor aproximado da integração para de -4 a 4 da equação de Styblinski-Tang para duas dimensões, para termos como o resultado real e quase-absoluto do problema.
 
-```Diferenças entre Monte Carlo 2D e método do retângulo
-Retângulos | Monte Carlo
+$\int_{-4}^4 \int_{-4}^4 \frac{x^4 - 16 x^2 + 5x + y^4  - 16 y^2 + 5 y}{2}\, \mathrm{d}x\, \mathrm{d}y ≈ -2184.5333333...$
 
-10 pontos:
-Tempo:     [   0.000135 ms | 2685.430526 ms]
-Resultado: [-2204.18048000 | -2184.44076682]
+A seguir duas tabelas com os valores obtidos pelos logs das execuções (note que o método de Monte Carlo é constante pois estamos comparando apenas para 10⁷ amostras em duas dimensões com valores alterando apenas para o método dos retângulos)
 
-100 pontos:
-Tempo:     [   0.000209 ms | 2685.430526 ms]
-Resultado: [-2196.24115405 | -2184.44076682]
+|Pontos|Tempo Retângulos (ms)|Tempo Monte Carlo p/ 10⁷ amostras(ms)|
+|:----:|:-------------------:|:------------------:|
+| 10   | 0.000135            | 2685.430526      | 
+| 10²  | 0.000209            | 2685.430526      |
+| 10³  | 0.001118            | 2685.430526      |
+| 10⁴  | 0.010404            | 2685.430526      |
+| 10⁵  | 0.101223            | 2685.430526      |
+| 10⁶  | 1.333846            | 2685.430526      |
+| 10⁷  | 10.274587           | 2685.430526      |
 
-1000 pontos:
-Tempo:     [   0.001118 ms | 2685.430526 ms]
-Resultado: [-2185.80241068 | -2184.44076682]
-
-10000 pontos:
-Tempo:     [   0.010404 ms | 2685.430526 ms]
-Resultado: [-2184.66122411 | -2184.44076682]
-
-100000 pontos:
-Tempo:     [   0.101223 ms | 2685.430526 ms]
-Resultado: [-2184.54613224 | -2184.44076682]
-
-1000000 pontos:
-Tempo:     [   1.333846 ms | 2685.430526 ms]
-Resultado: [-2184.53461332 | -2184.44076682]
-
-10000000 pontos:
-Tempo:     [  10.274587 ms | 2685.430526 ms]
-Resultado: [-2184.53346133 | -2184.44076682]
-
-Diferenças entre as iterações em dimensão do método de Monte Carlo
-
-2D:
-Tempo:     [2685.430526 ms]
-Resultado: [-2184.44076682]
-
-4D:
-Tempo:     [5399.730683 ms]
-Resultado: [-279623.48422305]
-
-8D:
-Tempo:     [10597.398606 ms]
-Resultado: [-2290631857.37847185]
-```
-
-A seguir a tabela correspondente
-|Pontos|Tempo Retângulos (ms)|Resultado Retângulos|Tempo Monte Carlo p/ 10⁷ amostras(ms)|Resultado Monte Carlo p/ 10⁷ amostras|
-|:----:|:-------------------:|:------------------:|:--------------------:|:-------------------:|
-| 10   | 0.000135            | 2204.18048000     | 2685.430526          | 2184.44076682      | 
-| 10²  | 0.000209            | 2196.24115405     | 2685.430526          | 2184.44076682      |
-| 10³  | 0.001118            | 2185.80241068     | 2685.430526          | 2184.44076682      |
-| 10⁴  | 0.010404            | 2184.66122411     | 2685.430526          | 2184.44076682      |
-| 10⁵  | 0.101223            | 2184.54613224     | 2685.430526          | 2184.44076682      |
-| 10⁶  | 1.333846            | 2184.53461332     | 2685.430526          | 2184.44076682      |
-| 10⁷  | 10.274587           | 2184.53346133     | 2685.430526          | 2184.44076682      |
+|Pontos|Resultado Retângulos|Resultado Monte Carlo p/ 10⁷ amostras|
+|:----:|:--------------------:|:-------------------:|
+| 10   | 2204.18048000          |      2184.44076682 |
+| 10²  | 2196.24115405          |      2184.44076682 |
+| 10³  | 2185.80241068          |      2184.44076682 |
+| 10⁴  | 2184.66122411          |      2184.44076682 |
+| 10⁵  | 2184.54613224          |      2184.44076682 |
+| 10⁶  | 2184.53461332          |      2184.44076682 |
+| 10⁷  | 2184.53346133          |      2184.44076682 |
 
 ### Entrada aceitável
 
-É visível que a partir de 10³ pontos, temos uma diferença de uma unidade entre o método de integração dos retângulos e do método de integração por Monte Carlo. Com um tempo uma diferença de tempo discrepante de 2685,429408 ms (2,6 segundos). Caso se deseja uma exatidão, é recomenado 10⁴ ou mais pontos.
+É visível que a partir de 10⁴ pontos, temos um ponto onde o valor para o metódo dos retângulos já ultrapassa o método de Monte Carlo em precisão, pois o erro absoluto é menor ($EA_{RET}$ = 0,12789081, $EA_{MC}$ = 0,220457290). Com o tempo uma diferença de tempo discrepante de 2685,429408 ms (2,6 segundos). 
+
+Caso se deseja uma exatidão maior com menos tempo, é recomendado o método dos retângulos com 10⁴ ou mais pontos.
+
+O porquê de ser mais rápido com sendo que há mais loops no método é explicado abaixo.
 
 ### Otimizações
-Devido às otimizações feitas nos loops dentro da função de cálculo dos retângulos, a mesma se tornou extremamente mais rápida. Melhorado apenas com detalhes algébricos, aparenta ser mais rápido que o método de Monte Carlo (apenas em instâncias de duas dimensões, pois o problema aumenta exponencialmente com mais passos).
+Devido às otimizações feitas nos loops dentro da função de cálculo dos retângulos, a mesma se tornou extremamente mais rápida. Melhorado apenas com detalhes algébricos/analíticos, aparenta ser mais rápido que o método de Monte Carlo devido a estarmos trabalhando especificamente com a função de ``Styblinski-Tang``.
 
+A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo e portanto, iguais), a exclusão de $\frac{1}{2}$ dos somatórios torna que apenas é necessário calcular uma vez para $n$ pontos.
+
+Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
+
+$h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2} \, \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$
+
+Como $x^4 - 16 x^2 + 5x = y^4 - 16 y^2 + 5y$ devido a serem equivalentes no sentido do passo e portanto, iguais. Podemos fazer isto:
+
+$h^{2} \, \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
+h^{2} \, \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =$
+
+$h^{2} \, \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
+\frac{1}{2}\, n \, p\, h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
+
+Como $n = 2$, temos que
+
+$\frac{1}{2}\, 2\, h^{2}\,p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
+ h^{2}\,p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
+
+No código está assim:
+```
+inline double f(double x) {
+	return ((x * x * x * x) + (-16 * (x * x)) + (5 * x));
+}
+
+double retangulos_xy(double a, double b, int qntdPontos) {
+    [...]
+    
+    for(int i = 0; i < qntdPontos; i++) {
+    	soma += f(a + i * h);
+    }
+
+    // h² * somatorio * qntdPontos
+    resultado = (h * h) * soma * qntdPontos;
+    
+    [...]
+}
+```
 ### Resultados de Monte Carlo
 
 | Dimensões |  Resultado Monte Carlo | Tempo Monte Carlo p/ 10⁷ amostras (ms)|
