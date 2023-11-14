@@ -62,12 +62,12 @@ A seguir duas tabelas com os valores obtidos pelos logs das execuções (note qu
 
 Caso se deseja uma exatidão maior com menos tempo, é recomendado o método dos retângulos com 10⁴ ou mais pontos.
 
-O porquê de ser mais rápido com sendo que há mais loops no método é explicado abaixo.
+O porquê de ser mais rápido sendo que há mais loops no método dos retângulos do que no de Monte Carlo é explicado abaixo.
 
 ### Otimizações
-Devido às otimizações feitas nos loops dentro da função de cálculo dos retângulos, a mesma se tornou extremamente mais rápida. Melhorado apenas com detalhes algébricos/analíticos, aparenta ser mais rápido que o método de Monte Carlo devido a estarmos trabalhando especificamente com a função de ``Styblinski-Tang``.
+Devido às otimizações feitas nos loops dentro da função de cálculo dos retângulos, a mesma se tornou extremamente mais rápida. Melhorado apenas com detalhes algébricos/analíticos, aparenta ser mais rápido que o método de Monte Carlo devido a estarmos trabalhando especificamente com a função de ``Styblinski-Tang`` (para funções genéricas, o mesmo não funcionaria).
 
-A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo e portanto, iguais), a exclusão de $\frac{1}{2}$ dos somatórios torna que apenas é necessário calcular uma vez para $n$ pontos.
+A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo e portanto, iguais), a exclusão de $\frac{1}{2}$ dos somatórios e a manipulação algébrica dos somatórios torna que apenas é necessário calcular uma vez para $n$ pontos.
 
 Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
 
