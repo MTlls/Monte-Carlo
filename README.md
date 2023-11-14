@@ -71,19 +71,19 @@ A não-dependencia de $x$ com $y$ (tornando-os equivalentes no sentido do passo 
 
 Abaixo uma demonstração, com $n$ sendo o número de dimensões e $p$ o número de pontos.
 
-$h^{2}\displaystyle\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$
+$\displaystyle h^{2}\sum_{i=1}^{p}\sum_{i=j}^{p} \frac{\displaystyle\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}{2} = h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x}$
 
 Como $x^4 - 16 x^2 + 5x = y^4 - 16 y^2 + 5y$ devido a serem equivalentes no sentido do passo e portanto, iguais. Podemos fazer isto:
 
-$h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
+$\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {\sum_{k=1}^{n} x^4 - 16 x^2 + 5x} =
 h^{2}  \frac{1}{2} \sum_{i=1}^{p}\sum_{j=1}^{p} {n (x^4 - 16 x^2 + 5x)} =$
 
-$h^{2}  \frac{1}{2} \displaystyle\sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
+$\displaystyle h^{2}  \frac{1}{2} \sum_{i=1}^{p}pn (x^4 - 16 x^2 + 5x) = 
 \frac{1}{2} n  p h^{2} \sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
 
 Como $n = 2$, temos que
 
-$\frac{1}{2} 2 h^{2}p\displaystyle\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
+$ \displaystyle\frac{1}{2} 2 h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x) =
  h^{2}p\sum_{i=1}^{p}(x^4 - 16 x^2 + 5x)$
 
 No código está assim:
