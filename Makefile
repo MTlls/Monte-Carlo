@@ -7,7 +7,7 @@
 	override CFLAGS += -Wall -O3 -lm -mavx -march=native -D_RET_ -D_MC_
 	LFLAGS = -lm
 # Lista de arquivos para distribuição
-DISTFILES = *.c *.h README.md Makefile
+DISTFILES = *.c *.h README.md Makefile *.sh
 DISTDIR = `basename ${PWD}`
 
 .PHONY: all debug clean purge dist
@@ -31,7 +31,7 @@ $(PROG): $(OBJS)
 
 clean:
 	@echo "Limpando ...."
-	@rm -f *~ *.bak *.tmp core 
+	@rm -f *~ *.bak *.tmp core
 
 purge: clean
 	@echo "Faxina ...."
