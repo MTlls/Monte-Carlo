@@ -25,8 +25,8 @@ inline double f(double x) {
 }
 
 // Integral Monte Carlo da função de 2 variáveis/dimesnões
-double MonteCarlo(double a, double b, int dimensoes) {
-	double resultado = 0.0, soma = 0.0, h = b - a, x = 0.0;
+double monteCarlo(double a, double b, int dimensoes) {
+	double resultado = 0.0, h = b - a, x = 0.0;
 	double t_inicial, t_final;  // tempo que será cronometrado.
 
 	printf("a = (%f), b = (%f), n = (%d), dimensões = %d\n", a, b, NPONTOS, dimensoes);
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 	SRAND(20232);
 	// INICIAR VALOR DA SEMENTE
 	// CHAMAR FUNÇÕES DE INTEGRAÇÃO E EXIBIR RESULTADOS
-	printf("Resultado por Monte Carlo: %.8lf\n", styblinskiTang(atoi(argv[1]), atoi(argv[2]), atoi(argv[4])));
+	printf("Resultado por Monte Carlo: %.8lf\n", monteCarlo(atoi(argv[1]), atoi(argv[2]), atoi(argv[4])));
 	putchar('\n');
 #endif
 #ifdef _RET_
@@ -100,4 +100,5 @@ int main(int argc, char **argv) {
 	printf("Resultado por método dos retângulos: %.8lf\n", retangulos_xy(atoi(argv[1]), atoi(argv[2]), atoi(argv[3])));
 	return 0;
 #endif
+
 }
